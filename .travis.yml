@@ -8,7 +8,7 @@ before_install:
 script:
   - docker run -e CI=true snjanbu/multi-client npm test
 
-after_install:
+after_success:
   - docker run -t snjanbu/multi-client ./client
   - docker run -t snjanbu/multi-nginx ./nginx
   - docker run -t snjanbu/multi-server ./server
