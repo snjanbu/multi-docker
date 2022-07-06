@@ -9,10 +9,10 @@ script:
   - docker run -e CI=true snjanbu/multi-client npm test
 
 after_success:
-  - docker run -t snjanbu/multi-client ./client
-  - docker run -t snjanbu/multi-nginx ./nginx
-  - docker run -t snjanbu/multi-server ./server
-  - docker run -t snjanbu/multi-worker ./worker
+  - docker build -t snjanbu/multi-client ./client
+  - docker build -t snjanbu/multi-nginx ./nginx
+  - docker build -t snjanbu/multi-server ./server
+  - docker build -t snjanbu/multi-worker ./worker
   # Docker login
   - docker login -u="${DOCKER_ID}" -p="${DOCKER_PASSWORD}"
   # Push images to docker hub
