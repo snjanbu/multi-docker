@@ -36,7 +36,9 @@ const redisPublisher = redisClient.duplicate();
 
 app.get("/values/all", async (req, res) => {
 	console.log("SELECTING ALL VALUES 27101995");
-	const values = await pgClient.query("SELECT * from values");
+	const values = await pgClient.query("SELECT * from values").catch((err) => {
+		console.log("ERROR WHILE FETCHING ALL VALUES 27101995", err);
+	});
 	console.log("SELECTING ALL VALUES 27101995", values.rows);
 	res.send(values.rows);
 });
@@ -44,7 +46,7 @@ app.get("/values/all", async (req, res) => {
 app.get("/values/current", async (req, res) => {
 	console.log("SELECTING CURRENT VALUES 27101995");
 	redisClient.hgetall("values", (err, values) => {
-		console.log("SELECTING CURRENT VALUES 27101995", values);
+		console.log("SELECTING CURRENT VALUES 27101995", values, "ERROR": err);
 		res.send(values);
 	});
 });
