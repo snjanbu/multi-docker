@@ -37,6 +37,14 @@ const redisClient = redis.createClient({
 
 const redisPublisher = redisClient.duplicate();
 
+redisClient.on("ready", () => {
+	console.log("REDIS READY TO ACCEPt CONNECTIONS 27101995")
+});
+
+redisClient.on("error", (err) => {
+	console.log("REDIS ERROR 27101995", err)
+})
+
 app.get("/values/all", async (req, res) => {
 	console.log("SELECTING ALL VALUES 27101995 INITIATE");
 	const values = await pgClient.query("SELECT * from values").catch((err) => {
