@@ -46,7 +46,7 @@ app.get("/values/all", async (req, res) => {
 app.get("/values/current", async (req, res) => {
 	console.log("SELECTING CURRENT VALUES 27101995");
 	redisClient.hgetall("values", (err, values) => {
-		console.log("SELECTING CURRENT VALUES 27101995", values, "ERROR": err);
+		console.log("SELECTING CURRENT VALUES 27101995", values, "ERROR", err);
 		res.send(values);
 	});
 });
