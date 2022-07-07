@@ -21,7 +21,7 @@ let called = false;
 
 pgClient.on("connect", async (client) => {
 	await pgClient.query("set enable_parallel_hash=off;CREATE TABLE IF NOT EXISTS values (number INT);").catch((err) => {
-		console.log(err)
+		console.log(err, "ERROR WHILE CONNECTING 27101995")
 	})
 });
 
