@@ -20,7 +20,10 @@ const pgClient = new Pool({
 let called = false;
 
 pgClient.on("connect", async (client) => {
-	await pgClient.query("set enable_parallel_hash=off;CREATE TABLE IF NOT EXISTS values (number INT);").catch((err) => {
+	console.log("INITIATING CONNECTION REQUEST FOR PG");
+	await pgClient.query("set enable_parallel_hash=off;CREATE TABLE IF NOT EXISTS values (number INT);").then(() => {
+		console.log("PG CONNECTED SUCCESSFULLY 27101995");
+	}).catch((err) => {
 		console.log(err, "ERROR WHILE CONNECTING 27101995")
 	})
 });
@@ -35,7 +38,7 @@ const redisClient = redis.createClient({
 const redisPublisher = redisClient.duplicate();
 
 app.get("/values/all", async (req, res) => {
-	console.log("SELECTING ALL VALUES 27101995");
+	console.log("SELECTING ALL VALUES 27101995 INITIATE");
 	const values = await pgClient.query("SELECT * from values").catch((err) => {
 		console.log("ERROR WHILE FETCHING ALL VALUES 27101995", err);
 	});
