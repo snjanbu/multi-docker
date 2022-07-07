@@ -3,11 +3,11 @@ services:
   client:
     image: "snjanbu/multi-client"
     mem_limit: 128m
-    host_name: "client"
+    hostname: "client"
   server:
     image: "snjanbu/multi-server"
     mem_limit: 128m
-    host_name: "api"
+    hostname: "api"
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
@@ -19,13 +19,13 @@ services:
   worker:
     image: "snjanbu/multi-worker"
     mem_limit: 128m
-    host_name: "worker"
+    hostname: "worker"
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
     image: "snjanbu/multi-nginx"
     mem_limit: 128m
-    host_name: "nginx"
+    hostname: "nginx"
     ports:
       - "80:80"
